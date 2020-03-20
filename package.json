@@ -1,0 +1,14 @@
+{
+  "name": "ankeeto",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:GorillaTime/ankeeto.git",
+  "author": "Gorilla <log1230gori@outlook.jp>",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "pug": "2.0.0-rc.4"
+  }
+}
