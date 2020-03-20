@@ -1,4 +1,5 @@
 'use strict';
+const fs = require('fs');
 const http = require('http');
 const pug = require('pug');
 const auth = require('http-auth');
@@ -18,12 +19,18 @@ const server = http.createServer(basic, (req, res) => {
     res.end('ログアウトしました');
     return;
   }
-  
+  if(req.url === '/favicon.ico') {
+    var fav = fs.readFileSync("./favicon-16x16.png");
+    res.writeHead(200,{
+      'Content-Type': 'image/png; charset=utf-8'
+    });
+  } else {
   res.writeHead(200, {
     'Content-Type': 'text/html; charset=utf-8'
   });
-var firstITEM = '';
-var secondITEM = '';
+}
+var firstITEM = '(´・ω・｀)URLいじっちゃイヤよ';
+var secondITEM = '(´・ω・｀)URLいじっちゃ駄目よ';
   switch (req.method) {
     case 'GET':
       if (req.url === '/enquetes/yaki-shabu') {
@@ -38,7 +45,7 @@ var secondITEM = '';
         firstItem: firstITEM,
         secondItem: secondITEM
       }));
-      res.end();
+      res.end(fav);
       break;
     case 'POST':
       let rawData = '';
@@ -49,7 +56,7 @@ var secondITEM = '';
         console.info('[' + now + '] 投稿: ' + decoded);
         res.write('<!DOCTYPE html><html lang="ja"><body><h1>' +
           decoded + 'が投稿されました</h1></body></html>');
-        res.end();
+        res.end(fav);
       });
       break;
     default:
