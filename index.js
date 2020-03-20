@@ -7,13 +7,21 @@ const server = http.createServer((req, res) => {
   res.writeHead(200, {
     'Content-Type': 'text/html; charset=utf-8'
   });
-
+var firstITEM = '';
+var secondITEM = '';
   switch (req.method) {
     case 'GET':
+      if (req.url === '/enquetes/yaki-shabu') {
+          firstITEM = 'バナナ';
+          secondITEM = '熟したバナナ';
+      }else if(req.url === '/enquetes/rice-bread') {
+          firstITEM =　'ばなな';
+          secondITEM = 'BANANA';
+      }
       res.write(pug.renderFile('./form.pug', {
         path: req.url,
-        firstItem: 'バナナ',
-        secondItem: '熟したバナナ'
+        firstItem: firstITEM,
+        secondItem: secondITEM
       }));
       res.end();
       break;
@@ -37,7 +45,7 @@ const server = http.createServer((req, res) => {
 }).on('clientError', (e) => {
   console.error('[' + new Date() + '] Client Error', e);
 });
-const port = 8000;
+const port = process.env.PORT || 8000;
 server.listen(port, () => {
   console.info('[' + new Date() + '] Listening on ' + port);
 });
